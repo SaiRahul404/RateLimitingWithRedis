@@ -28,7 +28,6 @@ public class GoogleAuthFilter extends AbstractGatewayFilterFactory<GoogleAuthFil
         return (exchange, chain) -> {
             String path = exchange.getRequest().getURI().getPath();
 
-            // Skip token check for public endpoints
             if (path.equals("/api/sample/token")) {
                 return chain.filter(exchange);
             }
@@ -58,7 +57,6 @@ public class GoogleAuthFilter extends AbstractGatewayFilterFactory<GoogleAuthFil
                     return exchange.getResponse().setComplete();
                 }
 
-                // Token is valid — proceed
                 return chain.filter(exchange);
 
             } catch (Exception e) {
