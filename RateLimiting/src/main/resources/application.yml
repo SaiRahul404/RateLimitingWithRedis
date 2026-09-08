@@ -45,5 +45,13 @@ spring:
                 name: sampleApiCircuit
                 fallbackUri: forward:/rate-limit-exceeded
                 statusCodes: 429
+            - name: GoogleAuthFilter
 
-
+        - id: token-generator
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/sample/token/**
+        - id: test-project-2
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/TestProject2/**
